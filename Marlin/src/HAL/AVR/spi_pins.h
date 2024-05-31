@@ -45,10 +45,10 @@
   #define AVR_MOSI_PIN 22
   #define AVR_SS_PIN   20
 #elif defined(__AVR_ATmega1281__) || defined(__AVR_ATmega2561__)
-  #define AVR_SCK_PIN  10
-  #define AVR_MISO_PIN 12
-  #define AVR_MOSI_PIN 11
-  #define AVR_SS_PIN   16
+  #define AVR_SCK_PIN  9
+  #define AVR_MISO_PIN 11
+  #define AVR_MOSI_PIN 10
+  #define AVR_SS_PIN   8
 #endif
 
 #ifndef SD_SCK_PIN
