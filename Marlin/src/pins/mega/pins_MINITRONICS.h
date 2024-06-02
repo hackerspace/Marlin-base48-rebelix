@@ -67,9 +67,11 @@
 #define E0_DIR_PIN                            44
 #define E0_ENABLE_PIN                         27
 
+#if DISABLED(REPRAP_DISCOUNT_SMART_CONTROLLER)
 #define E1_STEP_PIN                           36
 #define E1_DIR_PIN                            35
 #define E1_ENABLE_PIN                         37
+#endif
 
 //
 // Temperature Sensors
@@ -101,7 +103,6 @@
 #define BEEPER_PIN                            -1
 
 #if ENABLED(REPRAPWORLD_GRAPHICAL_LCD)
-
   #define LCD_PINS_RS                         15  // CS chip select /SS chip slave select
   #define LCD_PINS_EN                         11  // SID (MOSI)
   #define LCD_PINS_D4                         10  // SCK (CLK) clock
@@ -112,8 +113,19 @@
 
   #define SD_DETECT_PIN                       30
 
-#else
+#elif ENABLED(REPRAP_DISCOUNT_SMART_CONTROLLER)
+   #define LCD_PINS_RS                        25
+   #define LCD_PINS_EN                        17
+   #define LCD_PINS_D4                        18
+   #define LCD_PINS_D5                        26
+   #define LCD_PINS_D6                        19
+   #define LCD_PINS_D7                        30
 
+   #define BTN_EN1                            35
+   #define BTN_EN2                            36
+   #define BTN_ENC                            37
+
+#else
   #define LCD_PINS_RS                         -1
   #define LCD_PINS_EN                         -1
 
