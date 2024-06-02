@@ -113,7 +113,7 @@
 
   #define SD_DETECT_PIN                       30
 
-#elif ENABLED(REPRAP_DISCOUNT_SMART_CONTROLLER)
+#elif ENABLED(REPRAP_DISCOUNT_SMART_CONTROLLER) || ENABLED(MAKEBOARD_MINI_2_LINE_DISPLAY_1602)
    #define LCD_PINS_RS                        25
    #define LCD_PINS_EN                        17
    #define LCD_PINS_D4                        18
