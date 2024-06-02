@@ -519,6 +519,13 @@ void MarlinUI::clear_for_drawing() { clear_lcd(); }
     set_custom_characters(CHARSET_BOOT);
     lcd.clear();
 
+#if LCD_HEIGHT < 4
+    lcd_moveto(0, 0); lcd_put_u8str(F("Marlin " SHORT_BUILD_VERSION));
+    lcd_moveto(0, 1); lcd_put_u8str(F(MARLIN_WEBSITE_URL));
+    safe_delay(2000);
+    return;
+#endif
+
     #define LCD_EXTRA_SPACE (LCD_WIDTH-8)
 
     #define CENTER_OR_SCROLL(STRING,DELAY) { \
