@@ -1668,13 +1668,14 @@
 
 // LCD Print Progress options. Multiple times may be displayed in turn.
 #if HAS_DISPLAY && ANY(HAS_MEDIA, SET_PROGRESS_MANUALLY)
-  #define SHOW_PROGRESS_PERCENT           // Show print progress percentage (doesn't affect progress bar)
-  #define SHOW_ELAPSED_TIME               // Display elapsed printing time (prefix 'E')
-  //#define SHOW_REMAINING_TIME           // Display estimated time to completion (prefix 'R')
-  #if ENABLED(SET_INTERACTION_TIME)
-    #define SHOW_INTERACTION_TIME         // Display time until next user interaction ('C' = filament change)
+  #if LCD_HEIGHT >= 4
+    #define SHOW_PROGRESS_PERCENT           // Show print progress percentage (doesn't affect progress bar)
+    #define SHOW_ELAPSED_TIME               // Display elapsed printing time (prefix 'E')
+    //#define SHOW_REMAINING_TIME           // Display estimated time to completion (prefix 'R')
+    #if ENABLED(SET_INTERACTION_TIME)
+      #define SHOW_INTERACTION_TIME         // Display time until next user interaction ('C' = filament change)
+    #endif
   #endif
-  //#define PRINT_PROGRESS_SHOW_DECIMALS  // Show/report progress with decimal digits, not all UIs support this
 
   #if ANY(HAS_MARLINUI_HD44780, IS_TFTGLCD_PANEL)
     //#define LCD_PROGRESS_BAR            // Show a progress bar on HD44780 LCDs for SD printing
