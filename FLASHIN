@@ -1,0 +1,56 @@
+Hi Vega,
+
+here's how I update firmware for the printer:
+
+Make sure you've got the "rebelix-for-vega" [1] branch checked out:
+[1] https://github.com/hackerspace/Marlin-base48-rebelix/tree/rebelix-for-vega
+
+  $ git clone https://github.com/hackerspace/Marlin-base48-rebelix
+  $ cd Marlin-base48-rebelix
+  $ git checkout rebelix-for-vega
+  $ make marlin
+  $
+
+Flash it:
+
+  $ avrdude -b 57600 -P /dev/ttyUSB0 -c arduino -p m1281 -U flash:w:.pio/build/mega1281/firmware.hex
+  $
+
+Note that there's two jumpers on the board:
+
+  1.) Select 5V from a) USB or b) onboard LVR (from 12V).
+      Currently set to onboard.
+  2.) USB/UART reset, currently disabled.
+
+This means that the printer needs to be plugged into mains and powered on,
+and you need to reset it to bootloader when you run avrdude. The front panel
+reset button is wired directly to hard reset (out of pins for soft reset),
+so that one works. I'm not sure when is the right moment to reset, but it
+appears it's not too difficult to just try and get lucky:
+
+  $ avrdude -b 57600 -P /dev/ttyUSB0 -c arduino -p m1281 -U flash:w:.pio/build/mega1281/firmware.hex
+  avrdude warning: attempt 1 of 10: not in sync: resp=0xd7
+  avrdude warning: attempt 2 of 10: not in sync: resp=0xd7
+  avrdude warning: attempt 3 of 10: not in sync: resp=0xa9
+  avrdude error: programmer is not responding
+  avrdude warning: attempt 4 of 10: not in sync: resp=0x00
+  avrdude: AVR device initialized and ready to accept instructions
+  avrdude: device signature = 0x1e9704 (probably m1281)
+  avrdude: Note: flash memory has been specified, an erase cycle will be performed.
+           To disable this feature, specify the -D option.
+  avrdude: erasing chip
+  
+  avrdude: processing -U flash:w:.pio/build/mega1281/firmware.hex:i
+  avrdude: reading input file .pio/build/mega1281/firmware.hex for flash
+           with 110032 bytes in 1 section within [0, 0x1adcf]
+           using 430 pages and 48 pad bytes
+  avrdude: writing 110032 bytes flash ...
+  Writing | #######                                            | 13% 4.53 s 
+
+If you find this inconvenient, just flip the reset jumper (and perhaps also
+the 5V one) and it will reset itself when avrdude starts.
+
+  >o
+  _(\)
+
+  Lubo
